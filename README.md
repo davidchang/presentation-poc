@@ -4,31 +4,32 @@ hi guys. got a few hours to myself tonight, so let's build a proof of concept ap
 
 7:53pm
 
-mkdir translation-poc; cd translation-poc; yo angular poc;
+```mkdir translation-poc; cd translation-poc; yo angular poc;```
 
 which calls bower install and npm install
 
 7:55pm
 
-git init; git commit -a -m "initial commit"
+```git init; git commit -a -m "initial commit"```
 
 working in Sublime Text 2
 
 7:56pm
 
-grunt server
+```grunt server```
 
 pops up the working Angular app. Add Firebase scripts:
 
+```
 <script src="//cdn.firebase.com/v0/firebase.js"></script> 
-
 <script src="//cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js"></script>
+```
 
 7:57pm
 
 let's create a "create" page:
 
-yo angular:route create
+```yo angular:route create```
 
 where we'll be able to provide presentation metadata and enter the actual presentation content.
 
@@ -56,43 +57,43 @@ so now we should be able to hook this up to save to Firebase.
 
 roadblock saving data to Firebase. this error:
 
-Error: Firebase.update failed: First argument contains an invalid key ($$hashKey) in property
+```Error: Firebase.update failed: First argument contains an invalid key ($$hashKey) in property```
 
 8:27pm
 
 http://stackoverflow.com/questions/17680131/firebase-push-failed-first-argument-contains-an-invalid-key-hashkey
 
+```
 angular.copy($scope.presentation)
+```
 
 maddeningly simple - everything just works. Here's all of my code to save to Firebase:
 
+```
 var ref = new Firebase('https://davidchang.firebaseio.com/translation-poc');
-
 ref.update(angular.copy($scope.presentation));
+```
 
 8:30pm
 
 some tweaks and we're still moving:
 
+```
 var toSave = {};
-
 toSave[$scope.desiredURL] = angular.copy($scope.presentation);
-
 var ref = new Firebase('https://davidchang.firebaseio.com/translation-poc');
-
 ref.update(toSave, function() {
-
-$location.path('/view/' + $scope.desiredURL);
-
+    $location.path('/view/' + $scope.desiredURL);
 });
+```
 
 8:31pm
 
-git commit -a -m "create page working"
+```git commit -a -m "create page working"```
 
 8:32pm
 
-yo angular:route view
+```yo angular:route view```
 
 to view the presentation you just created. but will want to keep and remember the $scope.desiredURL to be able to pull down the right firebase URL
 
@@ -100,7 +101,7 @@ to view the presentation you just created. but will want to keep and remember th
 
 actually, should make that firebase URL into an angular constant or else this could get messy.
 
-yo angular:constant firebase-url
+```yo angular:constant firebase-url```
 
 then updated the value in the firebase-url.js file created; then listed that constant as a dependent in my create controller.
 
@@ -108,7 +109,7 @@ then updated the value in the firebase-url.js file created; then listed that con
 
 the router would look something like this:
 
-.when('/view/:presentationId', { })
+```.when('/view/:presentationId', { })```
 
 and the view controller would list $routeParams as a dependency and be able to do $routeParams.presentationId to retrieve.
 
@@ -116,17 +117,17 @@ and the view controller would list $routeParams as a dependency and be able to d
 
 forgot to list 'firebase' as an app dependency and 'angularFire' as a controller dependency. can read in data like so:
 
-$scope.presentation = angularFire(firebaseUrl, $scope, $routeParams.presentationId);
+```$scope.presentation = angularFire(firebaseUrl, $scope, $routeParams.presentationId);```
 
 8:45pm
 
 hmm... that didn't work. reading in data like so:
 
+```
 var url = firebaseUrl + '/' + $routeParams.presentationId;
-
 var ref = new Firebase(url);
-
 angularFire(ref, $scope, 'presentation');
+```
 
 8:47pm
 
@@ -134,15 +135,15 @@ slightly modified view.html and we're good to go. now we need to find a way of c
 
 8:51pm
 
-also, $location.path('/view/' + $scope.desiredURL); alone doesn't trigger the refresh. requires a $scope.$apply() afterwards to trigger the digest cycle.
+also, ```$location.path('/view/' + $scope.desiredURL);``` alone doesn't trigger the refresh. requires a ```$scope.$apply()``` afterwards to trigger the digest cycle.
 
 8:52pm
 
-git commit -a -m "view page working"
+```git commit -a -m "view page working"```
 
 8:53pm
 
-yo angular:route presenters-control
+```yo angular:route presenters-control```
 
 for the presenter to navigate through the presentation
 
@@ -154,7 +155,7 @@ basically just copied what was in the view controller and partial - will need ba
 
 this simple to get position in presentation:
 
-<tr ng-class="{selected: $index == presentation.content.index}" ng-repeat="row in presentation.content.data">
+```<tr ng-class="{selected: $index == presentation.content.index}" ng-repeat="row in presentation.content.data">```
 
 9:02pm
 
@@ -166,7 +167,7 @@ high five! done with that page. now just need to go back to the #/view/:presenta
 
 9:04pm
 
-git commit -a -m "presenters-control working"
+```git commit -a -m "presenters-control working"```
 
 9:06pm
 
@@ -176,7 +177,7 @@ oops. cleaned up #/presenters-control to indicate when you have finished the pre
 
 done! not very efficient, but done. this would be terrible for any large data set, but i can control which rows are shown on the /view page by doing this:
 
-<tr ng-class="{hidden: $index > presentation.content.index}" ng-repeat="row in presentation.content.data">
+```<tr ng-class="{hidden: $index > presentation.content.index}" ng-repeat="row in presentation.content.data">```
 
 then i'll be viewing the page on:
 
@@ -198,4 +199,4 @@ high five! calling this done. the create page is a little weird from all of the 
 
 9:35pm
 
-git commit -a -m "main page implemented, everything finished"
+```git commit -a -m "main page implemented, everything finished"```
