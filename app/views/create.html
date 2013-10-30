@@ -1,0 +1,49 @@
+<section>
+  <h1>Add Metadata</h1>
+  <div>
+    <input type="text" ng-model="presentation.metadata.title" placeholder="Title">
+  </div>
+  <div>
+    <input type="text" ng-model="presentation.metadata.presenter" placeholder="Presenter">
+  </div>
+  <div>
+    <input type="text" ng-model="desiredURL" placeholder="Desired URL">
+  </div>
+</section>
+<section>
+  <h1>Add Content</h1>
+  <table class="table fullWidth table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Original Text</th>
+        <th>Translated Text</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in presentation.content">
+        <td>
+          {{ row.original }}
+        </td>
+        <td>
+          {{ row.translated }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" ng-model="originalText" placeholder="Original Text">
+        </td>
+        <td>
+          <input type="text" ng-model="translatedText" placeholder="Translated Text">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button ng-click="saveLine()" class="btn pull-right">Save line</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+<section>
+  <button ng-click="savePresentation()" class="btn pull-right">Save presentation</button>
+</section>
