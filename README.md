@@ -1,3 +1,13 @@
+Synced Presentation Proof of Concept
+====================================
+
+View the demo here: [http://davidchang.github.io/presentation-poc/#/](http://davidchang.github.io/presentation-poc/#/)
+
+A proof of concept app of a synced presentation, using Yeoman, Angular, and Firebase. A year or two ago, this would have taken a whole lot of work. But now, with these technologies, someone like me who hasn't spent that much time with Firebase can just put something together in 90 minutes.
+
+Unedited stream of conscious journaling
+=======================================
+
 7:48pm
 
 hi guys. got a few hours to myself tonight, so let's build a proof of concept app. in the past, synchronizing things like presentations were super hard for a non-back-end-inclined guy like me and required all sorts of stuff like socket.io. but i realized recently that Firebase can solve this problem and can basically synchronize all of your data - the presenter can control the flow of the data and everyone else logged in will automatically see the changes. Let's build an app that will sync presentations across all devices for all users, so everyone will always be looking at the same thing.
