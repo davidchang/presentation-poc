@@ -42,10 +42,11 @@ angular.module('pocApp')
 
     $scope.savePresentation = function() {
       var toSave = {};
+      $scope.presentation.metadata.desiredURL = $scope.desiredURL;
       toSave[$scope.desiredURL] = angular.copy($scope.presentation);
       var ref = new Firebase(firebaseUrl);
       ref.update(toSave, function() {
-        $location.path('/view/' + $scope.desiredURL);
+        $location.path('/presenters-control/' + $scope.desiredURL);
         $scope.$apply();
       });
     }

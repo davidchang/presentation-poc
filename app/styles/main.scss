@@ -34,10 +34,16 @@ tr.selected {
         }
     }
 }
+tr.hidden {
+    display: none;
+}
 
 .margin-top {
     margin-top: 20px;
 }
 .margin-bottom {
     margin-bottom: 20px;
+}
+.title {
+    font-weight: bold;
 }

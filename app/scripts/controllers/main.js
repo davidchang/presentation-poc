@@ -1,10 +1,7 @@
 'use strict';
 
 angular.module('pocApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope, firebaseUrl, angularFire) {
+    var ref = new Firebase(firebaseUrl);
+    angularFire(ref, $scope, 'presentations');
   });

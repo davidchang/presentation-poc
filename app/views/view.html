@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="row in presentation.content.data">
+      <tr ng-class="{hidden: $index > presentation.content.index}" ng-repeat="row in presentation.content.data">
         <td>
           {{ row.original }}
         </td>

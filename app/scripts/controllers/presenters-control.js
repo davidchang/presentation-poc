@@ -2,6 +2,7 @@
 
 angular.module('pocApp')
   .controller('PresentersControlCtrl', function ($scope, $routeParams, firebaseUrl, angularFire) {
+    $scope.presentationId = $routeParams.presentationId;
     var url = firebaseUrl + '/' + $routeParams.presentationId;
     var ref = new Firebase(url);
     angularFire(ref, $scope, 'presentation');
