@@ -1,0 +1,36 @@
+<section>
+  <h1>{{ presentation.metadata.title }}</h1>
+  <h3>{{ presentation.metadata.presenter }}</h3>
+</section>
+<section>
+  You can view the presentation at <a ng-href="#/view/{{presentationId}}" target="_blank">/view/{{ presentationId }}</a>
+</section>
+<section class="margin-bottom">
+  <button ng-click="resetPosition()" class="btn">Reset to Start</button>
+</section>
+<section>
+  <table class="table fullWidth table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Original Text</th>
+        <th>Translated Text</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-class="{selected: $index == presentation.content.index}" ng-repeat="row in presentation.content.data">
+        <td>
+          {{ row.original }}
+        </td>
+        <td>
+          {{ row.translated }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+<section ng-if="presentation.content.index < presentation.content.data.length">
+  You finished the presentation! <button ng-click="resetPosition()" class="btn">Reset to Start</button>
+</section>
+<section>
+  <button ng-click="incrementPosition()" ng-disabled="presentation.content.index >= presentation.content.data.length" class="btn pull-right">Increment Position</button>
+</section>

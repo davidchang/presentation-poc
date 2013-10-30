@@ -1,0 +1,18 @@
+<section>
+  <h1>Presentation Proof of Concept App</h1>
+</section>
+
+<section>
+  <h3>
+    Existing Presentations:
+  </h3>
+  <table class="table table-striped table-bordered">
+    <tbody>
+      <tr ng-repeat="presentation in presentations">
+        <td class="title">{{presentation.metadata.title}}</td>
+        <td><a class="btn" ng-href="#/view/{{presentation.metadata.desiredURL}}">view</a></td>
+        <td><a class="btn" ng-href="#/presenters-control/{{presentation.metadata.desiredURL}}">control</a></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
