@@ -11,28 +11,13 @@ angular.module('pocApp')
         presenter: ''
       },
       content: {
-        presentationIndex: 0,
+        index: 0,
         data: []
       }
     };
 
-    $scope.presentation = {
-      metadata: {
-        title: 'title',
-        presenter: 'presenter'
-      },
-      content: {
-        index: 0,
-        data: [
-          {original: 1, translated: 2},
-          {original: 3, translated: 4},
-          {original: 5, translated: 6}
-        ]
-      }
-    };
-
     $scope.saveLine = function() {
-      $scope.presentation.content.push({
+      $scope.presentation.content.data.push({
         original: $scope.originalText,
         translated: $scope.translatedText
       });
