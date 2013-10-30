@@ -15,6 +15,10 @@ angular.module('pocApp', ['firebase'])
         templateUrl: 'views/view.html',
         controller: 'ViewCtrl'
       })
+      .when('/presenters-control/:presentationId', {
+        templateUrl: 'views/presenters-control.html',
+        controller: 'PresentersControlCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

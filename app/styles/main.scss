@@ -19,3 +19,25 @@ body {
         width: 95%;
     }
 }
+
+tr.selected {
+    td {
+        border-top: 1px solid blue;
+        border-bottom: 1px solid blue;
+        font-weight: bold;
+
+        &:last-child {
+            border-right: 1px solid blue;
+        }
+        &:first-child {
+            border-left: 1px solid blue;
+        }
+    }
+}
+
+.margin-top {
+    margin-top: 20px;
+}
+.margin-bottom {
+    margin-bottom: 20px;
+}
