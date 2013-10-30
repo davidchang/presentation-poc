@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('pocApp')
-  .controller('CreateCtrl', function ($scope, $location) {
+  .controller('CreateCtrl', function ($scope, $location, firebaseUrl) {
 
     $scope.desiredURL = '';
 
@@ -10,7 +10,10 @@ angular.module('pocApp')
         title: '',
         presenter: ''
       },
-      content: []
+      content: {
+        presentationIndex: 0,
+        data: []
+      }
     };
 
     $scope.presentation = {
@@ -18,11 +21,14 @@ angular.module('pocApp')
         title: 'title',
         presenter: 'presenter'
       },
-      content: [
-        {original: 1, translated: 2},
-        {original: 3, translated: 4},
-        {original: 5, translated: 6}
-      ]
+      content: {
+        index: 0,
+        data: [
+          {original: 1, translated: 2},
+          {original: 3, translated: 4},
+          {original: 5, translated: 6}
+        ]
+      }
     };
 
     $scope.saveLine = function() {
@@ -37,9 +43,10 @@ angular.module('pocApp')
     $scope.savePresentation = function() {
       var toSave = {};
       toSave[$scope.desiredURL] = angular.copy($scope.presentation);
-      var ref = new Firebase('https://davidchang.firebaseio.com/translation-poc');
+      var ref = new Firebase(firebaseUrl);
       ref.update(toSave, function() {
-        $location.path('/view');
+        $location.path('/view/' + $scope.desiredURL);
+        $scope.$apply();
       });
     }
 
